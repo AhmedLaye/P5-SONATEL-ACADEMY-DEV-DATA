@@ -1,0 +1,16 @@
+.text-primary {
+    color: #74c69d!important;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.hero{
+    background-color: #74c69d;
+}
+.monheader{
+    background-color: #74c69d;
+    position: fixed;
+}
