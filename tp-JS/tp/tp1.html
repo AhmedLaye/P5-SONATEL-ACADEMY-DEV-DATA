@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+     crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <script type="text/javascript" src="tp1.js" defer></script>
+    <title>Tp1</title>
+</head>
+<body class="bg-info">
+    <a href="/index.html">Retour à l'acceuil</a>
+    <style>
+        textarea{
+            min-height: 300px;
+        }
+    </style>
+<div class="container">
+    <h1>Mapremiere Methode</h1>
+    <p>JS est connu par ces diffenrent manière de faire, il offre plusieurs possiblité.
+        Dans cette methode je creer l'element dans le code js avec <span class="badge  bg-warning">createElement</span>
+    </p>
+    <button id="add-new" class="btn btn-secondary mt-5 py-2 px-5 rounded mb-5">Add Note</button>
+    <div id="container" class="row">
+    </div>
+    </div>
+</div>
+
+<div class=" border border-3"></div>
+<h1 class="display-4 fs-1"> Deuxieme methode</h1>
+
+
+<button class="btn btn-lg bg-success w-10" onclick="myFunction()">Add Note</button>
+<div class="row container mx-auto">
+   
+    <div class="row mx-auto" id="macarte">
+        <div  class="card text-dark bg-warning mb-3 col-md-3 col-lg-3 col-sm-3 mx-3 px-3" style="max-width: 18rem;">
+            <div class="card-header text-end">
+                <i class="bi bi-trash " onclick="supp()" id="trash"></i>
+                <i class="bi bi-pencil-square" onclick="desctiver()"></i>
+            </div>
+            <div class="card-body bg-light">
+           <textarea name="" id="textarea" style="width: 100%;"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+function myFunction() {
+  const node = document.getElementById("macarte").lastElementChild;
+  const clone = node.cloneNode(true);
+  document.getElementById("macarte").appendChild(clone);
+  
+};
+function supp(){
+    document.getElementById('macarte').lastElementChild.remove();
+}
+function desctiver(){
+    
+    document.getElementById("textarea").disabled = !document.getElementById("textarea").disabled
+
+}
+</script>
+</body>
+</html>

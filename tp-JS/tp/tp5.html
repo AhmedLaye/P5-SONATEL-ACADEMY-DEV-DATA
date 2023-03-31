@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Notifications de bouton</title>
+	<!-- Importation de Bootstrap pour la mise en forme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-5">
+		<!-- Création de quatre boutons avec des couleurs différentes -->
+		<button class="btn btn-primary" onclick="showNotification('primary')">Bouton primaire</button>
+		<button class="btn btn-warning" onclick="showNotification('warning')">Bouton secondaire</button>
+		<button class="btn btn-success" onclick="showNotification('success')">Bouton succès</button>
+		<button class="btn btn-danger" onclick="showNotification('danger')">Bouton danger</button>
+		<div id="notification-container" class="fixed-bottom mb-5"></div>
+		<!-- Le conteneur pour afficher les notifications est ajouté à la fin de la page -->
+	</div>
+
+	<!-- Importation de Bootstrap pour les fonctionnalités JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script>
+		// Fonction pour afficher une notification avec la couleur donnée
+		function showNotification(color) {
+			// Création de la notification avec la couleur donnée
+			var notification = document.createElement('div');
+			notification.className = 'alert alert-' + color + ' fade show';
+			notification.textContent = 'Notification ' + color;
+
+			// Ajout de la notification au conteneur de notifications
+			var container = document.getElementById('notification-container');
+			container.appendChild(notification);
+
+			// Disparition de la notification après une seconde
+			setTimeout(function() {
+				container.removeChild(notification);
+			}, 1000);
+		}
+	</script>
+</body>
+</html>

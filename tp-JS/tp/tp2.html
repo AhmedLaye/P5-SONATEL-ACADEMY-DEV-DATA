@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Move Elements</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .selected, .hover {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html">Retourner à l'acceuil</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-5">
+                <h4>Left</h4>
+                <div id="left" class="border p-2">
+                    <p>Mon Premier</p>
+                    <p>Mon Deuxième</p>
+                    <p>Mon Troisième</p>
+                    <p>Mon Quatrième</p>
+                </div>
+            </div>
+            <div class="col-md-2 mt-5">
+                <div class="d-flex flex-column align-items-center">
+                    <button id="toRight" class="btn btn-primary mt-2" disabled> >></button>
+                    <button id="toLeft" class="btn btn-primary mt-2" disabled> << </button>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h4>Right</h4>
+                <div id="right" class="border p-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const left = document.getElementById('left');
+        const right = document.getElementById('right');
+        const toRightBtn = document.getElementById('toRight');
+        const toLeftBtn = document.getElementById('toLeft');
+
+        left.addEventListener('click', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.add('selected');
+            }
+        });
+
+        left.addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.add('hover');
+            }
+        });
+
+        left.addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.remove('hover');
+            }
+        });
+
+        left.addEventListener('click', function(e) {
+            if (e.target.tagName === 'P') {
+                toRightBtn.disabled = false;
+            }
+        });
+
+        right.addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.add('hover');
+            }
+        });
+
+        right.addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.remove('hover');
+            }
+        });
+
+        right.addEventListener('click', function(e) {
+            if (e.target.tagName === 'P') {
+                e.target.classList.add('selected');
+            }
+        });
+      
+        right.addEventListener('click', function(e) {
+            if (e.target.tagName === 'P') {
+                toLeftBtn.disabled = false;
+            }
+        });
+
+        toRightBtn.addEventListener('click', function() {
+            const selected = left.querySelector('.selected');
+            right.appendChild(selected);
+            selected.classList.remove('selected');
+            toRightBtn.disabled = true;
+            if (left.children.length === 0) {
+                toRightBtn.disabled = true;
+            }
+        });
+
+        toLeftBtn.addEventListener('click', function() {
+            const selected = right.querySelector('.selected');
+            left.appendChild(selected);
+            selected.classList.remove('selected');
+            toLeftBtn.disabled = true;
+            if (right.children.length === 0) {
+                toLeftBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
