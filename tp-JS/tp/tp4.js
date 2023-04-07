@@ -10,6 +10,28 @@ var questions = [
       correctAnswer: "d"
     },
     // Ajouter d'autres questions ici
+    {
+        question: "Qui est le fondateur de SpaceX ?",
+        choices: [
+          {label: "Steve Jobs", value: "a"},
+          {label: "Elon Musk", value: "b"},
+          {label: "Bill Gates", value: "c"},
+          {label: "Mark Zuckerberg", value: "d"}
+        ],
+        correctAnswer: "b"
+      },
+      {
+        question: "Quel est le langage de programmation le plus utilisé pour les applications mobiles ?",
+        choices: [
+          {label: "Java", value: "a"},
+          {label: "Swift", value: "b"},
+          {label: "C++", value: "c"},
+          {label: "Python", value: "d"}
+        ],
+        correctAnswer: "b"
+      }
+    
+
   ];
   
   var currentQuestion = 0;
@@ -67,7 +89,6 @@ var questions = [
       score++;
       updateScore();
     }
-  
     currentQuestion++;
   
     if (currentQuestion == questions.length) {
@@ -86,6 +107,7 @@ var questions = [
   // Activer le bouton suivant lorsque l'utilisateur a coché une réponse
   var choices = document.querySelectorAll('input[name="choice"]');
   for (var i = 0; i < choices.length; i++) {
+    console
     choices[i].addEventListener("change", function() {
       nextButton.disabled = false;
     });

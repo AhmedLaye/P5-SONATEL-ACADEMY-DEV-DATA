@@ -10,29 +10,73 @@
     <title>Document</title>
 </head>
 <style>
-    .card-body {
+    .card-text {
   display: none;
+  position: absolute;
+  bottom: 20px;
+    right: 0px;
+    background-color: #ffc107d1;
+}
+.bg-dark {
+    background-color: #000000!important;
 }
 
 .show-description {
   display: block;
 }
 
-.card:hover .card-body {
+.card:hover .card-text {
   display: block;
 }
 
 </style>
-<body>
-    <form class="form-inline my-3" id="searchForm">
-        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un film" aria-label="Rechercher" name="searchInput">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-      </form>
+<body class="bg-dark" style="background-image: url('https://img.freepik.com/photos-gratuite/rangees-sieges-rouges-dans-theatre_53876-64710.jpg?w=900&t=st=1680784878~exp=1680785478~hmac=a22e40a7c6c4af54574694826c50b189697cbcdc5d8e8507f28c38ac633b2bf2');">
+    <nav class=" container navbar navbar-expand-lg navbar-dark bg-transparent     
+    border border-3 border-top-0 border-end-0 border-start-0 mb-2 border-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Loubess🎬😜</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Films</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Serie</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorie
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Nouveautés</a>
+              </li>
+            </ul>
+            <form class="d-flex" id="searchForm">
+              <input class="form-control me-2 bg-dark " type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-warning" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    
       
     <div class="container">
         <div class="row" id="movieList"></div>
-      </div>
-      
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
 </body>
 </html>
