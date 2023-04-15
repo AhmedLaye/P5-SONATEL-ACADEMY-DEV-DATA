@@ -218,6 +218,7 @@ badgesElems.forEach((badgeElem) => {
         break;
     }
   });
+  
 });
 
 // Récupérer le bouton de mode
