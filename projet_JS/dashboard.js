@@ -227,17 +227,22 @@ badgesElems.forEach((badgeElem) => {
         break;
     }
   });
-<<<<<<< HEAD
-  
-=======
-  const plusIcon = badgeElem.querySelector('.bx-plus');
 
+  const plusIcon = badgeElem.querySelector('.bx-plus');
+  plusIcon.setAttribute("data-bs-toggle", "modal")
+  plusIcon.setAttribute("data-bs-target", "#ajoutbagde")
+  plusIcon.setAttribute("data-bs-toggle", "modal")
+  
   plusIcon.addEventListener('click', (event) => {
     event.stopPropagation();
+    
     const plusID = event.currentTarget.getAttribute('id');
+
     switch (plusID) {
       case "sal":
-        console.log("ajout de classe")
+        console.log("ajout d'une salle")
+
+       
         
         break;
 
@@ -247,12 +252,12 @@ badgesElems.forEach((badgeElem) => {
         break;
 
       case "mod":
-        console.log("ajout de classe")
+        console.log("ajout de module")
         
         break;
 
       case "eng":
-        console.log("ajout de classe")
+        console.log("ajout d'un enseigna")
         
         break;
     
@@ -261,7 +266,6 @@ badgesElems.forEach((badgeElem) => {
     }
     console.log('Plus icon clicked');
   });
->>>>>>> f08ab57e1a9b3c056590d8884959f4752cd60dc4
 });
 
 // Récupérer le bouton de mode
@@ -283,11 +287,6 @@ modeBtn.addEventListener('click', function() {
     activerModeClair();
   }
 });
-
-
-
-
-
 
 
 // Fonction pour activer le mode sombre
