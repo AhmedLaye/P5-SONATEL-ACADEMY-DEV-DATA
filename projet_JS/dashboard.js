@@ -99,6 +99,7 @@ for (const jour in jours){
 const select_enseigant = document.getElementById('all_eng');
 const actif = select_enseigant.selectedIndex;
 const index_actif = select_enseigant[actif];
+enseignantsList[enseignantsList.selectedIndex]=enseignantsList[0]
 
 // Récupération de l'élément select
 const selectElem = document.getElementById('all_eng');
@@ -133,29 +134,29 @@ badgesElems.forEach((badgeElem) => {
     const badgeId = event.currentTarget.getAttribute('id');
     if (badgeId === 'Enseignants'){
       // si on selectionne le badge  enseignant  on creer son planning
-        console.log('Option sélectionnée par défaut :', index_actif);
+        prof=enseignantsList[liste_enseigant.selectedIndex]
+        console.log('Option sélectionnée par défaut :', enseignantsList[enseignantsList.selectedIndex]);
         select_enseigant.addEventListener('change', function() {
-        console.log('Option sélectionnée : ' + enseignantsList[liste_enseigant.selectedIndex]);
-       
-        console.log(aly.innerText.replace(aly.innerText, enseignantsList[enseignantsList.selectedIndex]))
         // aly.innerText= aly.innerText+ ' ' +enseignant[liste_enseigant.selectedIndex]+":"
-        aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :"+enseignantsList[liste_enseigant.selectedIndex])
+        aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :"+prof)
            //  les horaires
         var row_horaire=document.createElement("div");
-        row_horaire.className="d-flex col-12  ms-5  w-75   start-100 end-0  ";
-        for (let index = 8; index <= 17; index++) {
-          var horaire=document.createElement("p");
-          horaire.className="col-md-1 col-lg-1";
+        var offset=document.createElement("div")
+        offset.className="col-lg-2 ";
+        row_horaire.appendChild(offset);
+        row_horaire.className="d-flex row ";
+        for (let index = 8; index < 17; index++) {
+          var horaire=document.createElement("div");
+          horaire.className="col-md-1 col-lg-1 text-center";
           horaire.textContent=index+ "H";
           row_horaire.appendChild(horaire);
-          ul.appendChild(row_horaire)
         }
         // parcourir les objets
           ul.innerHTML=''
+          ul.appendChild(row_horaire)
             for (const jour in jours) {
               console.log(jour+"="+jours[jour])
               var li = document.createElement("div");
-              
               var cour=document.createElement("div");
               li.className = "list-group-item  col-lg-2 text-success bg-light py-3 rounded rounded-3";
               li.style.minHeight="70px";
@@ -182,20 +183,28 @@ badgesElems.forEach((badgeElem) => {
               cour.style.minHeight="70px";
 
               cour.className="list-group-item  col-lg-2  bg-secondary rounded rounded-3 bg-danger";
-              console.log("nouvelle colonne");
-              cour.innerHTML=`<div class="text-center py-0 my-0">`+Object.values(jours[jour][index])[1]+`</p>`+
-              `<p class="text-white >`+Object.values(jours[jour][index])[0]+
-              `<p>`+Object.values(jours[jour][index])[2]+`</p>`+`</div>`;
+             
+              cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
+              <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[1]+`</span>
+              <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[1]+`</span>
+              <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[1]+`</span>
+            </div>`
+              // Object.values(jours[jour][index])[2]
+              // +Object.values(jours[jour][index])[1]+
+              // +Object.values(jours[jour][index])[2];
               
               div.appendChild(cour);
               }
             }
+            
             div.appendChild(cour);
             ul.appendChild(div)
              
             }
+           
     });
     }
+    
     // si l'element badge selectionner n'est pas enseignant
     else{
       aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :")
@@ -218,7 +227,41 @@ badgesElems.forEach((badgeElem) => {
         break;
     }
   });
+<<<<<<< HEAD
   
+=======
+  const plusIcon = badgeElem.querySelector('.bx-plus');
+
+  plusIcon.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const plusID = event.currentTarget.getAttribute('id');
+    switch (plusID) {
+      case "sal":
+        console.log("ajout de classe")
+        
+        break;
+
+      case "clas":
+        console.log("ajout de classe")
+        
+        break;
+
+      case "mod":
+        console.log("ajout de classe")
+        
+        break;
+
+      case "eng":
+        console.log("ajout de classe")
+        
+        break;
+    
+      default:
+        break;
+    }
+    console.log('Plus icon clicked');
+  });
+>>>>>>> f08ab57e1a9b3c056590d8884959f4752cd60dc4
 });
 
 // Récupérer le bouton de mode
