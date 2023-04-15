@@ -240,9 +240,13 @@ badgesElems.forEach((badgeElem) => {
 
     switch (plusID) {
       case "sal":
+<<<<<<< HEAD
         console.log("ajout d'une salle")
 
        
+=======
+        console.log("ajout de sal")
+>>>>>>> 4d9e5a0 (modificationdes problemes au niveau de l'acceuil)
         
         break;
 
@@ -257,7 +261,11 @@ badgesElems.forEach((badgeElem) => {
         break;
 
       case "eng":
+<<<<<<< HEAD
         console.log("ajout d'un enseigna")
+=======
+        console.log("ajouter un ensigant")
+>>>>>>> 4d9e5a0 (modificationdes problemes au niveau de l'acceuil)
         
         break;
     
