@@ -6,82 +6,31 @@ const classesList = ['L2 GLRS', 'L2 GLS B', 'L2 ESTE','L1 A', 'IAGEB','L2CDSD'];
 const modulesList = ['Python', 'LC', 'PHP', 'Algo','JAVA','Javascript'];
 // const enseignant=['Aly', 'Mbaye','Baila', 'Ndoye', 'Djiby', 'Seckouba', 'Djiby'];
 const affichage_enseignant = document.getElementById('aly');
-let jours = {
-      "Lundi":
-      [{
-        "module":modulesList[3],
-        "Enseignant":enseignantsList[0],
-        "salle":sallesList[5],
-        "heure_Debut":8,
-        "heure_Fin":10,
-        "durée":2
+function creerObjet() {
+  let jours = {
+    "Lundi": [],
+    "Mardi": [],
+    "Mercredi": [],
+    "Jeudi": [],
+    "Vendredi": [],
+    "Samedi": []
+  };
 
-      },
-      {
-        "module":modulesList[4],
-        "Enseignant":enseignantsList[1],
-        "salle":sallesList[0],
-        "heure_Debut":8,
-        "heure_Fin":10,
-        "durée":2
+  for (let jour in jours) {
+    jours[jour].push({
+      "module":'',
+      "Enseignant":'',
+      "salle":'',
+      "heure_Debut":0,
+      "heure_Fin":0,
+      "durée":0
+    });
+  }
 
-      },
-      {
-        "module":modulesList[0],
-        "Enseignant":enseignantsList[1],
-        "salle":sallesList[0],
-        "heure_Debut":8,
-        "heure_Fin":10,
-        "durée":2
+  return jours;
+}
+const jours=creerObjet();
 
-      },
-    ],
-      
-      "Mardi":
-      [{
-        "module":modulesList[3],
-        "Enseignant":enseignantsList[3],
-        "salle":sallesList[0],
-        "heure_Debut":8,
-        "heure_Fin":10,
-        "durée":2
-
-      }, ],
-      "Mercredi":
-      [{
-        "module":modulesList[1],
-        "Enseignant":enseignantsList[2],
-        "salle":sallesList[3],
-        "heure_Debut":8,
-        "heure_Fin":10,
-        "durée":2
-      }, ],
-      "Jeudi":
-      [{ "module":modulesList[0],
-      "Enseignant":enseignantsList[4],
-      "salle":sallesList[0],
-      "heure_Debut":8,
-      "heure_Fin":10,
-      "durée":2
-    }, ],
-      "Vendredi":
-      [{ 
-        "module":modulesList[0],
-      "Enseignant":enseignantsList[0],
-      "salle":sallesList[0],
-      "heure_Debut":8,
-      "heure_Fin":10,
-      "durée":2
-    },],
-      "Samedi":
-     [ { "module":modulesList[0],
-      "Enseignant":enseignantsList[0],
-      "salle":sallesList[0],
-      "heure_Debut":8,
-      "heure_Fin":10,
-      "durée":2
-    },]
-};
 
 var ul = document.getElementById("liste-jours-semaine");
 // const keys = Object.keys(jours); 
@@ -97,9 +46,14 @@ for (const jour in jours){
 }
 // quand un enseignant est selectionné
 const select_enseigant = document.getElementById('all_eng');
-const actif = select_enseigant.selectedIndex;
-const index_actif = select_enseigant[actif];
-enseignantsList[enseignantsList.selectedIndex]=enseignantsList[0]
+
+function is_selected(liste){
+  const actif = select_enseigant.selectedIndex;
+  const index_actif = select_enseigant[actif];
+  liste[liste.selectedIndex]=liste[0]
+  return liste[liste.selectedIndex]
+
+}
 
 // Récupération de l'élément select
 const selectElem = document.getElementById('all_eng');
@@ -119,9 +73,19 @@ function selectionner(list) {
     selectElem.appendChild(optionElem);
     if (list===sallesList) {
       optionElem.setAttribute("capacite", 123)
+      optionElem.setAttribute("id",value)
     }
     if (list===enseignantsList) {
-      optionElem.setAttribute("id", list.indexOf(value))
+      optionElem.setAttribute("id", value)
+    }
+    if (list===sallesList) {
+      optionElem.setAttribute("id", value)
+    }
+    if (list===classesList) {
+      optionElem.setAttribute("id", value)
+    }
+    if (list===modulesList) {
+      optionElem.setAttribute("id", value)
     }
   });
 }
@@ -130,82 +94,123 @@ function selectionner(list) {
 badgesElems.forEach((badgeElem) => {
   badgeElem.addEventListener('click', (event) => {
     // Récupération de l'ID du badge cliqué
-    
-    const badgeId = event.currentTarget.getAttribute('id');
-    if (badgeId === 'Enseignants'){
-      // si on selectionne le badge  enseignant  on creer son planning
-        prof=enseignantsList[liste_enseigant.selectedIndex]
-        console.log('Option sélectionnée par défaut :', enseignantsList[enseignantsList.selectedIndex]);
-        select_enseigant.addEventListener('change', function() {
-        // aly.innerText= aly.innerText+ ' ' +enseignant[liste_enseigant.selectedIndex]+":"
-        aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :"+prof)
-           //  les horaires
-        var row_horaire=document.createElement("div");
-        var offset=document.createElement("div")
-        offset.className="col-lg-2 ";
-        row_horaire.appendChild(offset);
-        row_horaire.className="d-flex row ";
-        for (let index = 8; index < 17; index++) {
-          var horaire=document.createElement("div");
-          horaire.className="col-md-1 col-lg-1 text-center";
-          horaire.textContent=index+ "H";
-          row_horaire.appendChild(horaire);
-        }
-        // parcourir les objets
-          ul.innerHTML=''
-          ul.appendChild(row_horaire)
-            for (const jour in jours) {
-              console.log(jour+"="+jours[jour])
-              var li = document.createElement("div");
-              var cour=document.createElement("div");
-              li.className = "list-group-item  col-lg-2 text-success bg-light py-3 rounded rounded-3";
-              li.style.minHeight="70px";
-              li.setAttribute("data-bs-toggle", "modal")
-              li.setAttribute("data-bs-target", "#mamodal")
-              li.setAttribute("data-bs-toggle", "modal")
-              // /liste des cours
-              var div =document.createElement("div");
-              div.className="row  border border-1 border-light border-start-0 ";
-              li.setAttribute("id",jour)
-              li.appendChild(document.createTextNode(jour+ ' +'));
-              div.appendChild(li);
-              prof=enseignantsList[liste_enseigant.selectedIndex]
-              // console.log(enseignantsList.indexOf(enseignantsList.selectedIndex))
-              console.log("liste contient " +Object.values(jours[jour][0]))
-              console.log(" element est recherché " +prof)
-              // ici on calcule la durer pour les offset-lg-2 
-              console.log("dans lundi on a " +Object.values(jours[jour][0].Enseignant))
-              for (let index = 0; index < Object.values(jours[jour]).length; index++) {
-                  if (Object.values(jours[jour][index]).includes(prof)) {
-              console.log("oui c'est bon pour "+ prof)
-              console.log(enseignantsList[liste_enseigant.selectedIndex])
-              var cour=document.createElement("div");
-              cour.style.minHeight="70px";
+    function creerPlanning(liste,badgeID) {
+        // si on selectionne le badge  enseignant  on creer son planning
+          prof=liste[liste_enseigant.selectedIndex]
+          console.log('Option sélectionnée par défaut :', liste[liste.selectedIndex]);
+          select_enseigant.addEventListener('change', function() {
+          // aly.innerText= aly.innerText+ ' ' +enseignant[liste_enseigant.selectedIndex]+":"
+          aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :"+liste[liste_enseigant.selectedIndex])
+             //  les horaires
+          var row_horaire=document.createElement("div");
+          var offset=document.createElement("div")
+          offset.className="col-lg-2 ";
+          row_horaire.appendChild(offset);
+          row_horaire.className="d-flex row ";
+          for (let index = 8; index < 17; index++) {
+            var horaire=document.createElement("div");
+            horaire.className="col-md-1 col-lg-1 text-center";
+            horaire.textContent=index+ "H";
+            row_horaire.appendChild(horaire);
+          }
+          // parcourir les objets
+            ul.innerHTML=''
+            ul.appendChild(row_horaire)
+              for (const jour in jours) {
+                console.log(jour+"="+jours[jour])
+                var li = document.createElement("div");
+                var cour=document.createElement("div");
+                li.className = "list-group-item  col-lg-2 text-success bg-light py-3 rounded rounded-3";
+                li.style.minHeight="70px";
+                li.setAttribute("data-bs-toggle", "modal")
+                li.setAttribute("data-bs-target", "#mamodal")
+                li.setAttribute("data-bs-toggle", "modal")
+                // /liste des cours
+                var div =document.createElement("div");
+                div.className="row  border border-1 border-light border-start-0 ";
+                li.setAttribute("id",jour)
+                li.appendChild(document.createTextNode(jour+ ' +'));
+                div.appendChild(li);
+                prof=liste[liste_enseigant.selectedIndex]
+                // console.log(enseignantsList.indexOf(enseignantsList.selectedIndex))
+                console.log("liste contient " +Object.values(jours[jour][0]))
+                console.log(" element est recherché " +prof)
+                // ici on calcule la durer pour les offset-lg-2 
+                console.log("dans lundi on a " +Object.values(jours[jour][0].Enseignant))
+                for (let index = 0; index < Object.values(jours[jour]).length; index++) {
+                    if (Object.values(jours[jour][index]).includes(prof)) {
+                        console.log("oui c'est bon pour "+ prof)
+                        console.log(liste[liste_enseigant.selectedIndex])
+                        var cour=document.createElement("div");
+                        cour.style.minHeight="70px";
+          
+                        cour.className="list-group-item  col-lg-2  bg-secondary rounded rounded-3 bg-danger";
+                        // Object.values(jours[jour][index])[2]
+                        // +Object.values(jours[jour][index])[1]+
+                        // +Object.values(jours[jour][index])[2];
+                        switch (liste) {
+                          case enseignantsList:
+                            cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
+                            <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[1]+`</span>
+                            <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[0]+`</span>
+                            <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[2]+`</span>
+                            </div>`
+                            div.appendChild(cour);
+                            break;
 
-              cour.className="list-group-item  col-lg-2  bg-secondary rounded rounded-3 bg-danger";
-             
-              cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
-              <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[1]+`</span>
-              <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[1]+`</span>
-              <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[1]+`</span>
-            </div>`
-              // Object.values(jours[jour][index])[2]
-              // +Object.values(jours[jour][index])[1]+
-              // +Object.values(jours[jour][index])[2];
+                          case sallesList:
+                            cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
+                              <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[2]+`</span>
+                              <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[0]+`</span>
+                              <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[1]+`</span>
+                              </div>`
+                              div.appendChild(cour);
+                              break;
+                          
+                          case modulesList:
+                            cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
+                              <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[0]+`</span>
+                              <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[2]+`</span>
+                              <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[1]+`</span>
+                              </div>`
+                              div.appendChild(cour);
+                              break;
+
+                          case classesList:
+                            cour.innerHTML=`<div class="badge bg-transparent text-wrap text-center" >
+                              <span class="text-white d-block fs-4 text-center">`+Object.values(jours[jour][index])[2]+`</span>
+                              <span class="text-dark d-block fs-5">`+Object.values(jours[jour][index])[3]+`</span>
+                              <span class="text-dark d-block text-reset fs-6">`+Object.values(jours[jour][index])[1]+`</span>
+                              </div>`
+                              div.appendChild(cour);
+                              break;
+                          default:
+                            break;
+                        }
+                }
+              }
               
               div.appendChild(cour);
-              }
-            }
-            
-            div.appendChild(cour);
-            ul.appendChild(div)
-             
-            }
-           
-    });
+              ul.appendChild(div)
+               
+              } 
+      });
+      
+    }
+    const badgeId = event.currentTarget.getAttribute('id');
+    if (badgeId === 'Enseignants'){
+      creerPlanning(enseignantsList, badgeId);
+    }
+    else if (badgeId === 'salle') {
+      creerPlanning(sallesList, badgeId)
+    }
+    else if(badgeId==="module"){
+      creerPlanning(modulesList, badgeId);
+    }
+    else if(badgeId==="classe"){
+      creerPlanning(classesList, badgeId);
     }
     
-    // si l'element badge selectionner n'est pas enseignant
     else{
       aly.innerText=aly.innerText.replace(aly.innerText, "PLaning :")
     }
@@ -246,27 +251,44 @@ badgesElems.forEach((badgeElem) => {
        
 =======
         console.log("ajout de sal")
+<<<<<<< HEAD
 >>>>>>> 4d9e5a0 (modificationdes problemes au niveau de l'acceuil)
         
+=======
+        salle=prompt("entrer la salle")
+        sallesList.push(salle)
+
+>>>>>>> 327aae4 (Ajout des focntionalités liées a l'ajout)
         break;
 
       case "clas":
         console.log("ajout de classe")
+        classe=prompt("entrer la classe")
+        classesList.push(classe)
         
         break;
 
       case "mod":
         console.log("ajout de module")
+        moduleList=prompt("entrer la module")
+        modulesList.push(module)
         
         break;
 
       case "eng":
+<<<<<<< HEAD
 <<<<<<< HEAD
         console.log("ajout d'un enseigna")
 =======
         console.log("ajouter un ensigant")
 >>>>>>> 4d9e5a0 (modificationdes problemes au niveau de l'acceuil)
         
+=======
+        console.log("ajouter un ensigant");
+        eng=prompt("entrer enseigant");
+        enseignantsList.push(eng)
+
+>>>>>>> 327aae4 (Ajout des focntionalités liées a l'ajout)
         break;
     
       default:
@@ -316,7 +338,6 @@ function activerModeSombre() {
   // Enregistrer le mode actuel dans le stockage local (localStorage)
   localStorage.setItem('mode', 'sombre');
 }
-
 // Fonction pour activer le mode clair
 function activerModeClair() {
   // Ajouter la classe "mode-clair" au corps de la page
@@ -347,22 +368,25 @@ searchInput.addEventListener("keyup", function() {
     return item.toLowerCase().indexOf(searchText) > -1;
   });
   
-  
-  selectElem.innerHTML = "";
-  filteredList.forEach(function(item) {
-    const opt = document.createElement("option");
+  ul.innerHTML = "";
+  filteredList.forEach((item) =>{
+    
+    const opt = document.createElement("div");
     
     opt.textContent = item;
+    opt.className="list-group-item  col-lg-12 text-dark"
     opt.setAttribute("id", enseignantsList.indexOf(item))
-    opt.selected='true';
-    selectElem.appendChild(opt);
+    
+    ul.appendChild(opt);
+    item.addEventListener('click',(event)=>{
+      console.log("ck")
+    });
+    
 
   });
 });
 
-
 // Stocker les valeurs dans des tableaux JavaScript
-
 
 // Récupérer les éléments de formulaire
 const enseignantSelect = document.getElementById("ajout_Enseignant");
@@ -387,7 +411,6 @@ createOptions(moduleSelect, modulesList);
 createOptions(salleSelect, sallesList);
 createOptions(classeSelect, classesList);
 
-
 // Récupérer les éléments de formulaire
 
 const heureDebutInput = document.getElementById("heured");
@@ -405,35 +428,21 @@ function saveFormValues() {
     heureFin: heureFinInput.value
 
   };
- 
-  console.log(Object.values(formValues))
-  console.log(jourselect.value)
-  const me =Object.create(jours[jourselect.value])
-  me.Enseignant=enseignantSelect.value;
-  me.module=moduleSelect.value;
-  me.salle=salleSelect.value;
-  me.heure_Fin=heureDebutInput.value;
-  me.heure_Debut=heureFinInput.value;
-  me.durée=7;
-  jours[jourselect.value].push(me)
-  console.log(me)
+  const cours =Object.create(jours[jourselect.value])
+  cours.Enseignant=enseignantSelect.value;
+  cours.module=moduleSelect.value;
+  cours.salle=salleSelect.value;
+  cours.heure_Fin=heureDebutInput.value;
+  cours.heure_Debut=heureFinInput.value;
+  jours[jourselect.value].push(cours)
 
-  localStorage.setItem("formValues", JSON.stringify(formValues));
-  localStorage.setItem("me", JSON.stringify(me));
+  // localStorage.setItem("formValues", JSON.stringify(formValues));
+  localStorage.setItem("cours", JSON.stringify(cours));
+  jours.push(cours)
 
 }
 
 // Ajouter un écouteur d'événements pour le bouton d'enregistrement
 const ajouter = document.getElementById("ajouter");
 ajouter.addEventListener("click", saveFormValues);
-// console.log(jours["Lundi"])
-// const me =Object.create(jours["Lundi"])
-// me.Enseignant="ameth";
-// me.module="pc";
-// me.salle="HH";
-// me.heure_Fin=1;
-// me.heure_Debut=8;
-// me.durée=7
 
-// console.log(me)
-// jours["Lundi"].push(me)
